@@ -1,0 +1,112 @@
+﻿kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: ''
+    app.openshift.io/vcs-uri: 'https://github.com/SenpaiFlo/nginx_auftrag-6.2.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+  resourceVersion: '2496655505'
+  name: nginx-auftrag-6-2-git
+  uid: d5643b66-02fb-4e77-813e-b5ae69551dc4
+  creationTimestamp: '2023-05-22T13:29:12Z'
+  generation: 4
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: '2023-05-22T13:34:42Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:app.openshift.io/vcs-ref': {}
+            'f:app.openshift.io/vcs-uri': {}
+            'f:openshift.io/generated-by': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:app.kubernetes.io/component': {}
+            'f:app.kubernetes.io/instance': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.kubernetes.io/part-of': {}
+            'f:app.openshift.io/runtime': {}
+            'f:app.openshift.io/runtime-version': {}
+        'f:spec':
+          'f:output':
+            'f:to': {}
+          'f:runPolicy': {}
+          'f:source':
+            'f:contextDir': {}
+            'f:git':
+              .: {}
+              'f:uri': {}
+            'f:type': {}
+          'f:strategy':
+            'f:sourceStrategy':
+              .: {}
+              'f:from': {}
+            'f:type': {}
+          'f:triggers': {}
+    - manager: openshift-apiserver
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: '2023-05-22T13:34:42Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:imageChangeTriggers': {}
+          'f:lastVersion': {}
+  namespace: flo04-dev
+  labels:
+    app: nginx-auftrag-6-2-git
+    app.kubernetes.io/component: nginx-auftrag-6-2-git
+    app.kubernetes.io/instance: nginx-auftrag-6-2-git
+    app.kubernetes.io/name: nginx-auftrag-6-2-git
+    app.kubernetes.io/part-of: redhat-webserver-git-app
+    app.openshift.io/runtime: nginx
+    app.openshift.io/runtime-version: latest
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'nginx-auftrag-6-2-git:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'nginx:latest'
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/SenpaiFlo/nginx_auftrag-6.2.git'
+    contextDir: /
+  triggers:
+    - type: Generic
+      generic:
+        secretReference:
+          name: nginx-auftrag-6-2-git-generic-webhook-secret
+    - type: GitHub
+      github:
+        secretReference:
+          name: nginx-auftrag-6-2-git-github-webhook-secret
+    - type: ImageChange
+      imageChange: {}
+    - type: ConfigChange
+  runPolicy: Serial
+status:
+  lastVersion: 2
+  imageChangeTriggers:
+    - lastTriggeredImageID: >-
+        image-registry.openshift-image-registry.svc:5000/openshift/nginx@sha256:c50bb3ae33a9171efc19f8673c800e86b45eda438ce8f78b9f3914f94d8433a3
+      from:
+        namespace: openshift
+        name: 'nginx:latest'
+      lastTriggerTime: '2023-05-22T13:34:42Z'
